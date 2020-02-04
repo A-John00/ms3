@@ -7,16 +7,27 @@
 #include "time.h"
 #include <map>
 
-Channel::Channel(int number_channel,std::string object_name){
+Channel::Channel(int number_channel,std::string object_name, int rows, int columns){
     this->num_channel = number_channel;
     this->object_name = object_name;
+    this->columns = columns;
+    this->rows = rows;
 }
+
+void Channel::set_numcols(int columns){
+    this->columns = columns;
+}
+
+void Channel::set_numrows(int rows){
+    this->rows = rows;
+}
+
 
 void Channel::LReLU(){
  for(int i = 0; i < (this->rows); i++)
- for(int z = 0; z < (this->column);z++){
-    if (kernel[i][z] < 0){
-        kernel[i][z] = kernel[i][z] * 0.01;
+ for(int z = 0; z < (this->columns);z++){
+    if (kernel->getValue(i, z) < 0){
+        kernel->setValue(i,z, kernel->getValue(i, z) * 0.01);
      }
    else{
 }
@@ -25,8 +36,8 @@ void Channel::LReLU(){
 
  void Channel::Print(){
      for(int i = 0; i < (rows); i++){
-     for(int z = 0; z < (column);z++){
-         cout << this->kernel[i][z] << ' ';
+     for(int z = 0; z < (columns);z++){
+         cout << kernel->getValue(i, z) << ' ';
  }
      cout << endl;
      }
@@ -35,26 +46,29 @@ void Channel::LReLU(){
 
 void Channel::Get_rc(int row, int column){
     this->rows = row;
-    this->column = column;
+    this->columns = column;
 }
 
-void Channel::Get_Kernel(vector<vector<double>> kernel){
+void Channel::Get_Kernel(matrix* kernel){
     vector <double> temp;
     for(int i = 0; i < (rows); i++){
-    for(int z = 0; z < (column);z++){
-        temp.push_back(kernel[i][z]);
+    for(int z = 0; z < (columns);z++){
+        temp.push_back(kernel->getValue(i, z));
 }
 this->kernel.push_back(temp);
 temp.clear();
 }
     }
 
+// keine ahnung was die macht bitte anpassen/verpassen
+// gleiche gilt für die unteren funktionen
+
 
 vector<vector<double>> Channel::Getter_Kernel(){
     vector <vector <double>> help;
     vector <double> temp;
     for(int i = 0; i < (rows); i++){
-    for(int z = 0; z < (column);z++){
+    for(int z = 0; z < (columns);z++){
         temp.push_back(this->kernel[i][z]);
     }
     help.push_back(temp);
@@ -64,21 +78,21 @@ vector<vector<double>> Channel::Getter_Kernel(){
 }
 
 void Channel::Clear(){
-    vector <vector<double>> vector;
-    vector.swap(this->kernel);
+    matrix* vector = new matrix(0, 0, false);
+    this->kernel = vector;
     this->rows = 0;
-    this->column = 0;
+    this->columns = 0;
     // this->kernel.shrink_to_fit();
 }
 
 
 
-void Channel::Set(vector<vector<double>> input){
-    this->kernel.swap(input);
+void Channel::Set(matrix* input){
+    this->kernel = input;
 }
 
 
-void Channel::Add(vector<vector<double> > input){
+void Channel::Add(matrix* input){
     vector<double> temp;
     for(int i = 0; i < (input.size()); i++){
     for(int z = 0; z < (input[0].size());z++){
@@ -96,5 +110,5 @@ int Channel::Getter_Rows(){
 }
 
 int Channel::Getter_Column(){
-    return(this->column);
+    return(this->columns);
 }

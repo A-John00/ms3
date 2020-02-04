@@ -7,11 +7,11 @@
 class Cnn
 {
 public:
-    typedef vector<vector<double>> Mat;
-    Cnn();
+    Cnn(vector<vector<double>> input);
 
 
-    static matrix* MaxPool3D(matrix* input);
+    static matrix* MaxPool3D20to10(matrix* input);
+    static matrix* MaxPool3D10to5(matrix* input);
 
 };
 
