@@ -3,6 +3,7 @@
 #include <random>
 #include "time.h"
 #include <map>
+#include "channel.h"
 
 using namespace std;
 
@@ -91,6 +92,26 @@ double matrix::maxquad(int rowb, int columnb){
         }
     }
     return tempmax;
+}
+matrix* matrix::helpcon20to20(matrix* a, matrix* b){
+    // matrix a is the first matrix
+    // so matrices a and b both share the dimension of 20x20
+    matrix* za = new matrix(22, 22, false);
+    for(int i = 0; i < 22; i++){
+        za->setValue(0, i, 0);
+        za->setValue(i, 0, 0);
+        za->setValue(21, i, 0);
+        za->setValue(i, 21, 0);
+        // creates the zero border matrix
+
+    }
+    for(int j = 0; j < 20; j++){
+        for(int k = 0; k < 20; k++){
+            za->setValue(j+1, k+1, a->getValue(j, k));
+            //sets the zero border matriceses values to the ones of a
+        }
+    }
+
 }
 
 

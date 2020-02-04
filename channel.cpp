@@ -49,27 +49,17 @@ void Channel::Get_rc(int row, int column){
     this->columns = column;
 }
 
-void Channel::Get_Kernel(matrix* kernel){
-    vector <double> temp;
-    for(int i = 0; i < (rows); i++){
-    for(int z = 0; z < (columns);z++){
-        temp.push_back(kernel->getValue(i, z));
-}
-this->kernel.push_back(temp);
-temp.clear();
-}
-    }
 
 // keine ahnung was die macht bitte anpassen/verpassen
 // gleiche gilt für die unteren funktionen
 
 
-vector<vector<double>> Channel::Getter_Kernel(){
+matrix* Channel::Getter_Kernel(){ // Returns the matrix of the kernel. Use it to get the initialized random Matrix from class Kernel.
     vector <vector <double>> help;
     vector <double> temp;
     for(int i = 0; i < (rows); i++){
     for(int z = 0; z < (columns);z++){
-        temp.push_back(this->kernel[i][z]);
+        temp.push_back(kernel->getValue(i, z));
     }
     help.push_back(temp);
     temp.clear();
@@ -112,3 +102,19 @@ int Channel::Getter_Rows(){
 int Channel::Getter_Column(){
     return(this->columns);
 }
+
+
+
+
+
+Channel* Channel::Conv3D(int rowb, int columnb){
+
+
+}
+
+
+
+
+
+
+

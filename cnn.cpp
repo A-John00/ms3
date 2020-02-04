@@ -6,14 +6,22 @@
 
 using namespace std;
 
-Cnn::Cnn(vector<vector<double>> input)
+Cnn::Cnn(matrix* input)
 {
-    Channel* ch0 = new Channel(0, "first", 0, 0);
+    Channel* ch0 = new Channel(20, "first", 0, 0);
+    // 20 is the number of the matrices third dimension/ the width
+
     ch0->Add(input);
-    ch0->set_numcols(1);
-    ch0->set_numrows(input.size());
     // adds input into the first channel/layer of the cnn
 }
+
+//keine ahnung ob initialisierung für dieses spezifische seins ollen oder nicht
+// also bitte hinzufügen
+
+
+
+
+
 
 matrix* Cnn::MaxPool3D20to10(matrix* input){
     // 20x20 to 10x10

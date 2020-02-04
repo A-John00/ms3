@@ -16,6 +16,8 @@ public:
     void printM();
     static matrix mult(matrix *a, matrix *b);
     double maxquad(int rowb, int columnb);
+    matrix* helpcon20to20(matrix* a, matrix* b);
+
 
 private:
     int rows; // number rows

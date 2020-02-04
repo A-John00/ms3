@@ -23,16 +23,19 @@ public:
     void Get_rc(int row, int column);
     void Get_Kernel(matrix* kernel);
     void Print();
-    vector<vector<double>> Getter_Kernel();
+    matrix* Getter_Kernel();
     int Getter_Rows();
     int Getter_Column();
+    Channel* Conv3D(int rowb, int columnb);
 
 
     int num_channel;
     std::string object_name;
     int rows;
     int columns;
-    matrix*  kernel;
+    vector<matrix*> kernels;
+    // vector consisting of the individual matrices
+
 
     //replaced vector<vector<double>> with matrix* objects
 
