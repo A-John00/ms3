@@ -9,8 +9,8 @@ class Channel
 {
 public:
     Channel(int num_channel, std::string object_name, int rows, int columns);
-    void Set(matrix* input);   // Sets a new Kernel.
-    void Add(matrix* input);
+    void Set(vector<Kernel*> input);   // Sets a new Kernel.
+    void Add(vector<Kernel*> input);
     // Adds something to a allready existing Kernel.
 
     void set_numrows(int rows);
@@ -33,7 +33,7 @@ public:
     std::string object_name;
     int rows;
     int columns;
-    vector<matrix*> kernels;
+    vector<Kernel*> kernels;
     // vector consisting of the individual matrices
 
 

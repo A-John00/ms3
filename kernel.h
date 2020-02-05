@@ -25,7 +25,7 @@ public:
     void Get_rc(int row, int column);
 
 
-    vector<vector<double>> kernel;
+    matrix* kernel;
     int rows;
     int column;
 
